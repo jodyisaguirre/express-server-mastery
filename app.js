@@ -8,7 +8,39 @@ const students = ('./studens.json')
 app.get ('/', (req,res) =>{
   res.send('Soft as cake 🍰 ')
 })
+app.get ('/students',(req,res) =>{
+  res.json({students})
+})
 
+app.get ('/students/:id',(req,res, next) =>{
+  const id = req.params.id
+  const student = students.filter(student =>{
+    return student.id == id
+})
+    if (!student.length){
+      next()
+    }
+
+  res.json({student: student[0]})
+})
+
+
+
+app.get ('/cakes',(req,res) =>{
+  res.json({cakes})
+})
+
+app.get ('/cakes/:id',(req,res, next) =>{
+  const id = req.params.id
+  const cake = cakes.filter(cake =>{
+    return student.id == id
+})
+    if (!cake.length){
+      next()
+    }
+
+  res.json({cake: cake[0]})
+})
 
 
 app.use(notFound)
