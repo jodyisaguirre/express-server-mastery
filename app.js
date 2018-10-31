@@ -1,55 +1,42 @@
 const express = require('express')
-const app = express ()
-let port = process.env.PORT || 3000
-
-const cake = ('./cakes.json')
-const students = ('./studens.json')
-
-app.get ('/', (req,res) =>{
-  res.send('Soft as cake 🍰 ')
-})
-app.get ('/students',(req,res) =>{
-  res.json({students})
-})
-
-app.get ('/students/:id',(req,res, next) =>{
-  const id = req.params.id
-  const student = students.filter(student =>{
-    return student.id == id
-})
-    if (!student.length){
-      next()
-    }
-
-  res.json({student: student[0]})
-})
+const bodyParser = require('body-parser')
+const cors = require('cors')
+const app = express()
+let port = process.env.PORT || 4000
 
 
+// Route imports
+const studentsRoutes = require('./routes/students')
+const cakesRoutes = require('./routes/cakes')
 
-app.get ('/cakes',(req,res) =>{
-  res.json({cakes})
+
+// General middleware
+  // Applied to all requests
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(cors())
+
+
+// Basic GET route that responds with emoji or something
+  // Lets us know the server is working
+app.get('/', (req, res) => {
+  res.send('😈😈😈😈😈')
 })
 
-app.get ('/cakes/:id',(req,res, next) =>{
-  const id = req.params.id
-  const cake = cakes.filter(cake =>{
-    return student.id == id
-})
-    if (!cake.length){
-      next()
-    }
-
-  res.json({cake: cake[0]})
-})
+// Any requests that START with /characters, send to this router file
+app.use('/cakes', cakesRoutes)
+app.use('/students', studentsRoutes)
 
 
+// Error handlers as final use case if routes don't match or if errors are generated
+  // 404
 app.use(notFound)
   // General purpose 'catch' all errors
 app.use(errorHandler)
 
 
 function notFound(req, res, next) {
-  res.status(404).send({ error: 'Not found!', status: 404, url: req.originalUrl })
+  res.status(404).send({ error: 'You Done Messed UP A-A-RON', status: 404, url: req.originalUrl })
 }
 
 // eslint-disable-next-line
@@ -58,5 +45,6 @@ function errorHandler(err, req, res, next) {
   const stack = process.env.NODE_ENV !== 'production' ? err.stack : undefined
   res.status(500).send({ error: err.message, stack, url: req.originalUrl })
 }
+
 
 app.listen(port, () => console.log(`Server running on port ${port}`))
