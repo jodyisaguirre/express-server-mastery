@@ -20,7 +20,7 @@ app.use(cors())
 // Basic GET route that responds with emoji or something
   // Lets us know the server is working
 app.get('/', (req, res) => {
-  res.send('😈😈😈😈😈')
+  res.send('Soft As Cake ')
 })
 
 // Any requests that START with /characters, send to this router file
@@ -36,7 +36,7 @@ app.use(errorHandler)
 
 
 function notFound(req, res, next) {
-  res.status(404).send({ error: 'You Done Messed UP A-A-RON', status: 404, url: req.originalUrl })
+  res.status(404).send({ error: 'Not Today ISIS', status: 404, url: req.originalUrl })
 }
 
 // eslint-disable-next-line

@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 
 // Data
-const characters = require('../students.json')
+const students = require('../students.json')
 
 // GET all route
 // Send back all characters, with a root key of 'characters'
