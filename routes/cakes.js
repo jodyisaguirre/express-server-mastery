@@ -40,7 +40,6 @@ router.get('/:id', (req, res, next) => {
 router.post('/', (req, res, next) => {
   // Pull the data that is to be posted from the request body
   const body = req.body
-  console.log(body)
 
   // Insert new data into characters array
   // WE NEED BODY PARSER
@@ -58,9 +57,6 @@ router.post('/', (req, res, next) => {
 router.put('/:id', (req, res) => {
   const id = req.params.id
   const body = req.body
-
-  console.log(id)
-  console.log(body)
 
   // Find correct resource by it's ID
   // Some type of loop

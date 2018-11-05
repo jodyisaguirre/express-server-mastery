@@ -2,7 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const app = express()
-let port = process.env.PORT || 4000
+let port = process.env.PORT || 5000
 
 
 // Route imports
